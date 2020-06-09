@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .active {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <div>
+            {{ val }}
+        </div>
+
+        <div>
+            <p> num1:{{ num1 }}</p>
+            <p> num2:{{ num2 }}</p>
+            <p>求和 {{ num1 + num2 }}</p>
+        </div>
+
+        <div>
+            {{ flag ? "真" : "假" }}
+        </div> -->
+
+        <h1>2、属性指令</h1>
+        <a href="https://cn.vuejs.org/">点我去vue官网</a>
+        <a v-bind:href="stat">点我去vue官网</a>
+        <h1>加强class</h1>
+        <div :class="[className,{active1:flag}]" class="qwe">
+            123123
+        </div>
+        <h1>加强style</h1>
+        <div :style="obj">23123123</div>
+
+        <h1>3、条件指令</h1>
+
+
+        
+        <div v-if="1">哈哈</div>
+        <div v-else-if="false">嘿嘿</div>
+        <div v-else>呵呵</div>
+
+
+
+
+        <template v-if="isflag">
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+            <span>5</span>
+        </template>
+
+        <h1>4.循环指令</h1>
+        <ul>
+            <li v-for="(item,index) in arr">
+                {{item}}------{{index}}
+            </li>
+        </ul>
+
+        <ul>
+            <li v-for="(item,index) in list">
+                姓名：{{ item.name }}
+                年龄: {{ item.age }}
+                性别：{{ item.sex }}
+                <button v-on:click="del(index)">删除</button>
+            </li>
+        </ul>
+
+
+        <div>
+            <span v-for="(val,key) in obj">
+                {{ key }} : {{ val }}
+            </span>
+        </div>
+
+
+
+        <h1>二级渲染</h1>
+        <ul>
+            <li v-for="(item,index) in list1">
+                省：{{ item.name }}
+                <ol>
+                    <li v-for="(item,index) in item.children">
+                        市：{{ item.name }}
+                    </li>
+                </ol>
+            </li>
+        </ul>
+
+
+        <button v-on:click="dialog(1)">点我</button>
+    </div> 
+
+    <script>
+        // 第一步:引入js 
+        // src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"
+        // 第二部:实例化
+        // 结果 : 就是vue的实例化对象
+
+        // vue基本语法
+        // 1、模板语法指令
+        // 1-1 v-text       缩写  {{  }}  innerText
+        // 1-2 v-html                     innerHTML
+        // 1-3 v-model      以后再说
+        // 2、绑定元素属性 
+        // 2-1、v-bind:属性名称="值"  v-bind会经常用   缩写:
+        // 2-2 比较特殊的两个属性  style  class 
+        // vue对这两个属性进行了加强
+        // 2-2-1 class 对象类型是   
+        // 键值对  键名作为类名  前提是键值为真
+        // 2-2-2 class 数组类型
+        // 数组里面的值作为类名
+        // 2-2-3 style
+        // 3 条件指令
+        // 3-1 v-if  值为真 就渲染  为假 不渲染
+        // 3-2 v-show  值为真 就显示 为假 就隐藏(渲染) 设置 display="none"
+        // 六个为假的值
+        //  0  ""  null  undefined NaN false
+        // 4、循环指令
+        // 循环数组
+        // v-for="(item,index) in 数组"   item是数组的每一项  index是一项对应的下标
+        // 循环对象
+        // v-for="(val,key) in 对象"  val是对象的键值  key是键名
+        let vm = new Vue({
+            // 挂载节点
+            el: "#app",
+            // 绑定数据
+            data: {
+
+
+
+                val: "<h1>hello Vue !!</h1>",
+                num1: 1,
+                num2: 12,
+                flag: true,
+                stat: "https://cn.vuejs.org/",
+                className: "active",
+                className1: "active1",
+                obj: {
+                    background: "red",
+                    color: "white",
+                    fontSize: "100px"
+                },
+                isflag: true,
+                arr: ["a", "b", "c"],
+                list: [{
+                        name: "张三",
+                        age: "18",
+                        sex: "男"
+                    },
+                    {
+                        name: "李四",
+                        age: "22",
+                        sex: "女"
+                    }, {
+                        name: "王五",
+                        age: "16",
+                        sex: "未知"
+                    }
+                ],
+
+                list1: [{
+                        name: "河北",
+                        children: [{
+                            name: "邯郸"
+                        }, {
+                            name: "石家庄"
+                        }, {
+                            name: "邢台"
+                        }]
+                    },
+                    {
+                        name: "河南",
+                        children: [{
+                            name: "郑州"
+                        }, {
+                            name: "周口"
+                        }, {
+                            name: "邓州"
+                        }]
+                    }, {
+                        name: "山西",
+                        children: [{
+                            name: "临汾"
+                        }, {
+                            name: "巡城"
+                        }, {
+                            name: "长治"
+                        }]
+                    }
+                ]
+            },
+            // 放方法
+            methods:{
+                dialog(val){
+                    alert(val)
+                },
+                del(i){
+                    this.list.splice(i,1)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

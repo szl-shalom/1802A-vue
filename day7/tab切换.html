@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        span {
+            padding: 20px;
+        }
+
+        .active {
+            color: red;
+        }
+
+        .content {
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 标题 -->
+        <div class="title">
+            <span v-for="(item,index) in tabList" :class="{active:ind===index}" @click="ind=index">{{ item.title }}
+            </span>
+        </div>
+        <!-- 内容 -->
+        <div class="content">
+            <span v-for="(item,index) in tabList[ind].children">{{ item.title }}</span>
+        </div>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                // tab数据
+                tabList: [{
+                    title: "水果",
+                    children: [{
+                        title: "苹果"
+                    }, {
+                        title: "香蕉"
+                    }, {
+                        title: "西瓜"
+                    }]
+                }, {
+                    title: "蔬菜",
+                    children: [{
+                        title: "黄瓜"
+                    }, {
+                        title: "西红柿"
+                    }, {
+                        title: "洋葱"
+                    }]
+                }, {
+                    title: "面食",
+                    children: [{
+                        title: "面条"
+                    }, {
+                        title: "手擀面"
+                    }, {
+                        title: "拉面"
+                    }]
+                }],
+                ind: 0, //默认高亮下表
+            }
+        })
+    </script>
+</body>
+
+</html>

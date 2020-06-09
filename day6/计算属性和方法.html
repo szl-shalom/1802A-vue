@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+
+<body>
+
+    <div id="app">
+        <!--  方法执行 -->
+        <!-- {{ sum2() }}
+        {{ sum2() }}
+        {{ sum2() }} -->
+        <!-- 计算属性 -->
+        {{ sum1 }}
+        {{ sum1 }}
+        {{ sum1 }}
+    </div>
+    <script>
+        // vue实例方法
+        let vm = new Vue({
+            el: "#app",
+            // 放数据
+            data: {
+                num1: 1,
+                num2: 2
+            },
+            // 放方法
+            methods: {
+                sum2() {
+                    console.log("方法执行了")
+                    return this.num1 + this.num2
+                }
+            },
+            // 计算属性
+            computed: {
+                // 简写
+                // sum1() {
+                // console.log("计算属性执行了")
+                // return this.num1 + this.num2
+                // }
+                sum1: {
+                    get() {
+                        console.log("计算属性执行了")
+                        return this.num1 + this.num2
+                    },
+                    set(val){
+                        this.sum1 = val
+                    }
+                }
+            },
+        })
+        // 1、methods 是存放方法（函数）的地方
+        // 2、computed
+        // 比较特殊 : 
+        //  1、从定义上像是一个函数  用起来像一个属性   
+        //  2、计算属性是有缓存的  如果依赖的数据没有发生改变 会从缓存中直接取数据  
+
+        //  进阶用法
+        //  3、其实我们说的 第一项是一个缩写 
+        //  4、计算属性没有设置set方法  不允许修改值   
+        //  记住一点：不要在set直接设置值本身，会造成最大回调内存地址溢出
+    </script>
+</body>
+
+</html>

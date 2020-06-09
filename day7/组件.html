@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="(item,index) in list" :key="index">
+                {{ item }}
+                <my-first-con></my-first-con>
+                
+            </li>
+        </ul>
+        <h1>12312312</h1>
+    </div>
+    <script>
+        // 全局组件
+        Vue.component("my-first-con", {
+            // 模板文件
+            template: `
+            <div>
+                <div>
+                    这是我的第一个组件  
+                    {{ num }}
+                </div>
+
+                <div>
+                    呵呵    
+                </div>
+            </div>
+            `,
+            // 语法规定 必须是一个函数  函数返回出来一个对象
+            data() {
+                return {
+                    num: 1
+                }
+            }
+        })
+
+        new Vue({
+            el: "#app",
+            data: {
+                list: ["item-1", "item-2", "item-3"]
+            },
+        })
+
+        // 1、组件
+        // 通常情况 ： 想想一下  web应用程序里面 每一个标签就是最小的部件，
+        // 我们如果将多个部件组合成一个功能， 就是一个组件
+        // 在vue里面 组件是有 html+css+js组件
+        // 为啥组件
+        // 组件化思想：好维护，好复用等等 
+
+        // 2、注册
+        // 2-1 全局
+        // 语法：Vue.conponent("组件名称",{})
+        // 2-2 局部  先不说  
+
+
+        // 3、用 使用标签形式
+        // <组件名称></组件名称>
+
+        // 4、其实每一个组件也是vue的一个实例，只不过它没有el属性,但是有一个temlate
+
+
+        // 注意：1、组件上 data必须是一个函数  函数返回出来一个对象
+        //      2、组件上只可以用自己的数据 
+        //      3、组件的template必须有一个根元素
+        //      4、使用上:必须使用连字符方式连接
+        //         注册上：小驼峰  大驼峰  连字符
+
+
+</script>
+</body>
+
+</html>

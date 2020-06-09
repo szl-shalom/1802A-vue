@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div @click.self="go1">
+            父元素
+            <div @click="go2($event)">
+                子元素
+            </div>
+        </div>
+        <a href="https://cn.vuejs.org/" @click.prevent="go3()">点我去vue</a>
+        <button @click.once="go4">123</button>
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                num: 1
+            },
+            methods: {
+                go1() {
+                    console.log("父元素")
+                },
+                go2() {
+                    console.log("子元素")
+                },
+                go3() {},
+                go4() {
+                    alert(123)
+                }
+            },
+
+        })
+        // 事件是怎么传播的？
+        // 通过事件流 ，三个是哪个阶段
+        // 冒泡 （事件委托）
+        // 目标  
+        // 捕获
+
+
+        // 事件三要素 
+        // 事件源
+        // 事件类型
+        // 事件处理函数
+
+        // vue中的事件
+        // 1.语法：v-on:事件类型="表达式"     v-on: 缩写  @
+
+        // 2、事件类型
+        // 2-1 鼠标 ：  click  dblclick mousemove mouseenter moveleave 
+        //              mouseout mouseover mouerdown mouseup
+        // 2-2 表单 ：  submit  focus   change  blur
+        // 2-3 键盘 ：  keydown keypress keyup
+        // 2-4 UI ：    resize load scroll unload
+
+        // 3、表达式 
+        // 3-1 行内写法  不建议
+        // 3-2 函数形式  推荐
+
+
+        // 4、事件对象  vue帮你声明好了一个参数  $event 就是对象
+        // 阻止冒泡  stopPropagation
+        // 阻止默认行为 preventDefault
+
+
+        // 5、事件修饰符
+        // .stop 阻止冒泡
+        // .prevent 阻止默认行为
+        // .once 事件只触发一次
+        // .self 事件只触发本身
+    </script>
+</body>
+
+</html>

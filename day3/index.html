@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="qwe" werwerwerwe="123">1</div>
+    <div class="qwe" werwerwerwe="123">1</div>
+    <div class="qwe" werwerwerwe="123">1</div>
+    <div class="qwe" werwerwerwe="123">1</div>
+    <div class="qwe" werwerwerwe="123">1</div>
+    <div class="qwe" werwerwerwe="123">1</div>
+
+    <h1></h1>
+    <h1></h1>
+    <h1></h1>
+    <h1></h1>
+    <h1></h1>
+    <script>
+        // 1
+        const getDom = className => [...document.querySelectorAll(className)]
+
+
+        console.log(getDom(".qwe"))
+
+        // 2
+        Array.prototype.inArray = function (val) {
+            return this.indexOf(val)
+        }
+
+        let arr = ["a", "b", "c"]
+
+        console.log(arr.inArray("d"))
+
+        // 3
+
+        const getAttr = attrName => {
+            return [...document.querySelectorAll("*")].filter((item) => {
+                return item.getAttribute(attrName)
+            })
+        }
+
+
+        console.log(getAttr("daweqweq"))
+
+        // 4
+        let arr1 = [{
+            name: "哈哈",
+            time: +new Date() + 1000
+        }, {
+            name: "嘿嘿",
+            time: +new Date() + 10000
+        }, {
+            name: "啦啦",
+            time: +new Date() + 100000
+        }, {
+            name: "你好",
+            time: +new Date() + 1
+        }]
+
+        const goFilter = arr => {
+            return arr.sort((a, b) => {
+                return a.time - b.time
+            })
+        }
+
+        let res = goFilter(arr1)
+        console.log(res)
+    </script>
+</body>
+
+</html>

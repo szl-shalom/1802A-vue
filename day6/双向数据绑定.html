@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <h1>第一种</h1>
+        <!-- 语法糖原理   -->
+        <input type="text" v-model.number="mess">
+        <p>结果 {{ typeof mess }}</p> 
+
+
+
+
+        <h1>第二种 type="checkbox"</h1>
+        <input type="checkbox" v-model="arr" value="篮球">篮球
+        <input type="checkbox" v-model="arr" value="排球">排球
+        <input type="checkbox" v-model="arr" value="冰棒球">冰棒球
+        <p> 结果：{{ arr }}</p>
+        <h1>第三种 type="radio"</h1>
+        <input type="radio" v-model="val" value="篮球">篮球
+        <input type="radio" v-model="val" value="排球">排球
+        <input type="radio" v-model="val" value="冰棒球">冰棒球
+        <p> 结果：{{ val }}</p>
+        <h1>第四种 select</h1>
+        <select name="" id="" v-model="sel">
+            <option value="篮球">篮球</option>
+            <option value="排球">排球</option>
+            <option value="冰棒球">冰棒球</option>
+        </select>
+        <p> 结果：{{ sel }}</p>
+
+        <form>
+            <input type="text" v-model="username">
+            <input type="password" v-model="password" autocomplete>
+            <button type="button" @click="submit" >点我登录</button>
+        </form>
+    </div>
+
+    <script>
+        let vm = new Vue({
+            data: {
+                mess: "嘿嘿",
+                arr: ["篮球"],
+                val: "篮球",
+                sel: "排球",
+                username: "",
+                password: "",
+            },
+            el: "#app",
+            methods: {
+                submit(){
+                    console.log(this.username,this.password)
+                }
+            },
+        })
+
+
+        // 模板指令 v-model 双向数据绑定
+        // 该指令  应该用于表单元素
+        // 视图 <==> 数据
+        // 其实 v-model是一个语法糖  value 和 input
+        // 分类
+        // 1、input[type="text|password|email"], textarea
+
+        // 2、input[type="checkbox"]
+        // 3、input[type="radio"]
+        // 4、select
+        // 5
+
+
+        // v-model 修饰符
+        // .lazy  将时间类型 input 变为  change | 失去焦点
+        // .number  将数据转化为数字
+        // .trim   去除左右无效空格  
+    </script> 
+</body>
+
+</html>

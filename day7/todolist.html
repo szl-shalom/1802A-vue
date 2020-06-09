@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        #app {
+            margin: auto;
+            width: 500px;
+        }
+
+        h1 span,
+        b {
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="val" @keyup.enter="submit">
+
+        <h1>正在进行
+            <span>
+                {{ process.length }}
+            </span>
+        </h1>
+        <ul>
+            <li v-for="(item,index) in process" :key="item.id">
+                <input type="checkbox" @click="change(item.id)">
+                <span>{{ item.title }}</span>
+                <b @click="del(item.id)">X</b>
+            </li>
+        </ul>
+
+        <h1>已经完成
+            <span>
+                {{ todos.length }}
+            </span>
+        </h1>
+        <ul>
+            <li v-for="(item,index) in todos" :key="item.id">
+                <input type="checkbox" checked @click="change(item.id)">
+                <span>{{ item.title }}</span>
+                <b @click="del(item.id)">X</b>
+            </li>
+        </ul>
+    </div>
+    <script>
+        let id = 1;
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                todolist: [{
+                    title: "item-1",
+                    isCheck: true,
+                    id: id++
+                }, {
+                    title: "item-2",
+                    isCheck: false,
+                    id: id++
+                }, {
+                    title: "item-3",
+                    isCheck: false,
+                    id: id++
+                }, {
+                    title: "item-4",
+                    isCheck: true,
+                    id: id++
+                }, {
+                    title: "item-5",
+                    isCheck: true,
+                    id: id++
+                }],
+                val: "",
+            },
+            computed: {
+                todos() {
+                    return this.todolist.filter(item => item.isCheck)
+                },
+                process() {
+                    return this.todolist.filter(item => !item.isCheck)
+                }
+            },
+            methods: {
+                submit() {
+                    this.todolist.push({
+                        title: this.val,
+                        isCheck: false,
+                        id: id++,
+                    })
+                    // 清空
+                    this.val = "";
+                },
+                del(id) {
+                    // 关键  寻找 id 所在的下标
+                    let ind = this.todolist.findIndex(function (item) {
+                        return item.id === id
+                    })
+                    // 删除
+                    this.todolist.splice(ind, 1)
+                },
+                change(id) {
+                    // 关键  寻找 id 所在的下标
+                    let ind = this.todolist.findIndex(function (item) {
+                        return item.id === id
+                    })
+                    // 切换状态 自身取反
+                    this.todolist[ind].isCheck = !this.todolist[ind].isCheck
+                }
+            },
+        })
+        // filter
+        // let arr = ["a", "b", "c"]
+        // let res = arr.filter(function (item) {
+        //     console.log(item)
+        //     return item === "a"
+        // })
+        // console.log(res)
+        // let arr = [{
+        //     name: "张三"
+        // }, {
+        //     name: "李四"
+        // }]
+        // let ind = arr.findIndex(function (item) {
+        //     return item.name === "王五"
+        // })
+        // console.log(ind)
+    </script>
+</body>
+
+</html>

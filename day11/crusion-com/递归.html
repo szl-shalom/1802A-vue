@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!--  -->
+    <script>
+        // 1、封装一个函数,函数接受一个整数，返回这个整数的阶层
+        function fun(num) {
+            return num > 1 ? num * fun(num - 1) : 1
+        }
+
+        let result = fun(5)
+        console.log(result)
+        // 2、
+
+    </script>
+</body>
+
+</html>

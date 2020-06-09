@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .active {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <a :href="href">点我去vue官网</a>
+
+        <div :class="{active:flag,active1:false}">
+            哈哈
+        </div>
+
+        <ul>
+            <li v-for="(item,index) in list" :class="{active:index===ind}" v-on:click="ind=index">
+                <span>{{ item.name }}</span>
+                <span>{{ item.age }}</span>
+                <span>下标 {{ index }}</span>
+            </li>
+        </ul>
+    </div>
+    <script>
+        /*
+            1、初始化一个 vue实例，绑定的节点是 #app 
+            2、使用动态属性  给a绑定属性herf 跳转 vue官网
+            3、动态绑定类名 active  使用对象的形式
+            4、有一个数据  要求使用循环语法  将数据循环出来
+            5、点击每一项切换类名  默认第一项高亮（tab切换）
+        */
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                href: "https://cn.vuejs.org/",
+                flag: false,
+                list: [{
+                    name: "张三",
+                    age: 18
+                }, {
+                    name: "李四",
+                    age: 22
+                }, {
+                    name: "王五",
+                    age: 30
+                }],
+                // 当前高亮下标
+                ind: 2
+            }
+        })
+        console.log(vm)
+    </script>
+</body>
+
+</html>

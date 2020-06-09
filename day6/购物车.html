@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="(item,index) in list">
+                商品名称{{item.title}}
+                数量 {{item.count}}
+                <button v-on:click="item.count++">点我数量+1</button>
+                单价{{item.price}}
+                <b v-on:click="del(index)">删除</b>
+            </li>
+        </ul>
+        <h1>总价：{{ allPrice  }}</h1>
+    </div>
+
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                list: [{
+                    title: "盒饭",
+                    price: 10,
+                    count: 2
+                }, {
+                    title: "盒饭1",
+                    price: 100,
+                    count: 1
+                }, {
+                    title: "盒饭3",
+                    price: 30,
+                    count: 4
+                }]
+            },
+            computed: {
+                allPrice() {
+                    return this.list.reduce((p, n) => p + n.count * n.price, 0)
+                }
+            },
+            methods: {
+                del(index) {
+                    this.list.splice(index, 1)
+                }
+            },
+        })
+
+
+
+        // 数组的方法 reduce
+        // Array.reduce(callback, [initValue])
+        //     let arr = [{
+        //         title: "盒饭",
+        //         price: 10,
+        //         count: 2
+        //     }, {
+        //         title: "盒饭1",
+        //         price: 100,
+        //         count: 1
+        //     }, {
+        //         title: "盒饭3",
+        //         price: 30,
+        //         count: 4
+        //     }]
+
+        //    let res =  arr.reduce(function (p, n) {
+        //         console.log(n)
+        //         console.log(p)
+        //         return p + n.price * n.count
+        //     }, 0)
+
+
+        // console.log(res)
+    </script>
+</body>
+
+</html>
